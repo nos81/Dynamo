@@ -1,31 +1,67 @@
-DYNAMO - Quantum Dynamic Optimization Package v1.0
+DYNAMO - Quantum Dynamic Optimization Package
 
-(c) Shai Machnes 2010, 
-Institute of Theoretical Physics, 
-Ulm University, 
-Germany
-email: shai.machnes at uni-ulm.de
-
-Released under the terms of the Lesser GNU Public License and Creative-Commons Attribution Share-Alike (see "license.txt" for details).
-
-If you use DYNAMO in your research, please add an attribution in the form of the following reference: 
-S. Machnes et-al, arXiv 1011.4874 
-
-For the latest version of this software, guides and information, visit http://www.qlib.info
-
-The best way to understand DYNAMO is review the demos.            
-
-Before running the demos, please make sure the 'Dynamo' directory is in MATLAB's search path by entering the following command
-
-    addpath('Dynamo'); % Replace 'Dynamo' with the name of the directory where Dynamo files (such as 'BFGS_search_function.m') reside.
-
-What are the demos ?
-
-    run_me_dynamo_demo_00           Using DYNAMO to solve a simple gate-synthesis problem. 
-                                    If your interests are focused on finding optimal control sequences for your specific system - this file is all you need to understand.
-    run_me_dynamo_demo_01           This demo will optimize a simple two-qubit QFT gate generation problem using a wide variety of algorithms
-                                    If you are interested in OC algorithm research, this is the place for you
-
-To understand a bit more about the inner-workings of DYNAMO, please read INTRO_TO_DYNAMO.txt
+Version 1.4.0
+Released 2016-07-14
 
 
+Introduction
+============
+
+DYNAMO is a flexible framework for solving numerical optimal control
+problems for quantum systems. It requires MATLAB R2011a or newer
+(matlab.mixin.Copyable).
+
+The latest development version can be downloaded from our Git
+repository at https://github.com/smite/Dynamo
+The user manual can be found in docs/dynamo_manual.tex, together with
+the bibliography.
+
+If you use DYNAMO in your research, please add an attribution in the
+form of the following reference:
+[TODO: DYNAMO 2 paper]
+
+
+Getting started
+===============
+
+Initialize the package by running init.m
+
+The best way to learn how to use DYNAMO is to review the demos in the
+examples/ directory.
+
+
+Design
+======
+
+The design is modularized and easily extendable.
+
+DYNAMO attempts to minimize calculations by way of delayed calculations.
+Whenever a control field is modified, DYNAMO marks that value as changed,
+and the mathematical objects that depend on it (single-slice exponents, start-to-t and
+t-to-end propagators etc.) as stale. Only when a specific stale object is needed
+(such as propagators when computing the error), are the calculations performed.
+At this point DYNAMO attempts to perform the minimal number of matrix exponentiations and
+multiplications to arrive at the desired result.
+
+See cache.m for the nitty-gritty details.
+
+
+License
+=======
+
+All the code is released under the Lesser GNU Public License (LGPL) 3.0,
+except where explicitly stated otherwise. Everything else
+(documentation, algorithms, etc.) is released under the Creative
+Commons Attribution-ShareAlike 3.0 License. See "LICENSE.txt" for details.
+
+In one sentence: Normal scientific community licensing philosophy ---
+take this work, do whatever you like with it, publish any enhancements
+you make back to the community, and don't forget to add a reference to
+the original authors.
+
+
+Authors
+=======
+
+Shai Machnes         2010-2012
+Ville Bergholm       2011-2016
